@@ -402,6 +402,12 @@
         <material>Gazebo/Black</material>
     </gazebo>
 
+    <!-- Laser Scanner Frame for positioning the gazebo_ros_laser-->
+    <link name="laser_scan_frame_link">
+    </link>
+
+
+
 <!-- JOINTS -->
     <!-- Motorized Wheels -->
     <joint name="base_to_wheel_left" type="continuous">
@@ -503,10 +509,16 @@
         <origin xyz="-0.05 -0.138 0.165" rpy="0 0 0"/>
     </joint>
 
-    <joint name="laser_scan_joint" type="fixed">
+    <joint name="laser_scan_link_joint" type="fixed">
         <parent link="base_link"/>
         <child link="laser_scan_link"/>
         <origin rpy="0 0 0" xyz="0 0 0.0775"/>
+    </joint>
+
+    <joint name="laser_scan_frame_joint" type="fixed">
+        <parent link="laser_scan_link"/>
+        <child link="laser_scan_frame_link"/>
+        <origin rpy="0 0 0" xyz="0 0 0.0306"/>
     </joint>
 
 <!-- PLUGINS -->
@@ -527,6 +539,37 @@
             <joint_name>front_pitch_joint</joint_name>
             <joint_name>back_pitch_joint</joint_name>
         </plugin>
+    </gazebo>
+
+    <!-- This plugin simulates the laser scanner sensor in Gazebo and publishes LaserScan data -->
+    <gazebo reference="laser_scan_frame_link">
+        <sensor name="laser_sensor" type="ray">
+            <pose>0 0 0 0 0 0</pose>
+            <ray>
+                <scan>
+                    <horizontal>
+                        <samples>720</samples>
+                        <resolution>0.5</resolution>
+                        <min_angle>-3.14</min_angle>
+                        <max_angle>3.14</max_angle>
+                    </horizontal>
+                </scan>
+                <range>
+                    <min>0.15</min>
+                    <max>12.0</max>
+                </range>
+            </ray>
+            <always_on>true</always_on>
+            <visualize>true</visualize>
+            <update_rate>10.0</update_rate>
+            <plugin name="laser" filename="libgazebo_ros_ray_sensor.so">
+                <ros>
+                    <namespace>/barista_robot</namespace>
+                    <remapping>~/out:=scan</remapping>
+                </ros>
+                <output_type>sensor_msgs/LaserScan</output_type>
+            </plugin>
+        </sensor>
     </gazebo>
 
 </robot>
