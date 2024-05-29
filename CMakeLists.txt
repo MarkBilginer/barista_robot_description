@@ -7,8 +7,13 @@ endif()
 
 # find dependencies
 find_package(ament_cmake REQUIRED)
+find_package(rclpy REQUIRED)
 find_package(urdf REQUIRED)
 find_package(xacro REQUIRED)
+find_package(gazebo_ros REQUIRED)
+find_package(robot_state_publisher REQUIRED)
+find_package(joint_state_broadcaster REQUIRED)
+
 
 if(BUILD_TESTING)
   find_package(ament_lint_auto REQUIRED)
@@ -28,6 +33,7 @@ install(
     launch
 	rviz
 	meshes
+	gazebo
   DESTINATION
     share/${PROJECT_NAME}/
 )
