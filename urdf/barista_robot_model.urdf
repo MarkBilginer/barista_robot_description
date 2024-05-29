@@ -406,6 +406,31 @@
     </link>
 
 
+    <!-- Cup Holder Tray -->
+    <link name="cup_holder_tray">
+        <visual>
+            <geometry>
+                <cylinder radius="0.160" length="0.090"/>
+            </geometry>
+            <material name="blue"/>
+        </visual>
+        <collision>
+            <geometry>
+                <cylinder radius="0.160" length="0.090"/>
+            </geometry>
+        </collision>
+        <inertial>
+            <mass value="2.0"/>
+            <origin xyz="0 0 0.045"/>
+            <inertia ixx="0.01415" ixy="0.0" ixz="0.0" iyy="0.01415" iyz="0.0" izz="0.0256"/>
+        </inertial>
+    </link>
+
+    <gazebo reference="cup_holder_tray">
+        <material>Gazebo/Blue</material>
+    </gazebo>
+
+
 
 <!-- JOINTS -->
     <!-- Motorized Wheels -->
@@ -519,6 +544,14 @@
         <child link="laser_scan_frame_link"/>
         <origin rpy="0 0 0" xyz="0 0 0.0306"/>
     </joint>
+
+    <joint name="base_to_cup_holder_tray" type="fixed">
+        <parent link="base_link"/>
+        <child link="cup_holder_tray"/>
+        <origin xyz="0 0 0.3025" rpy="0 0 0"/>
+    </joint>
+
+
 
 <!-- PLUGINS -->
     <!-- JOINT PUBLISHER -->
