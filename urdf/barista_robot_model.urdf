@@ -54,20 +54,20 @@
         <visual>
             <origin rpy="1.5707 0 0" xyz="0 0 0"/>
             <geometry>
-                <cylinder radius="0.03" length="0.04"/>
+                <cylinder radius="0.0352" length="0.0206"/>
             </geometry>
             <material name="yellow"/>
         </visual>
         <collision>
             <origin rpy="1.5707 0 0" xyz="0 0 0"/>
             <geometry>
-                <cylinder radius="0.03" length="0.04"/>
+                <cylinder radius="0.0352" length="0.0206"/>
             </geometry>
         </collision>
         <inertial>
             <mass value="0.2"/>
             <origin rpy="1.5707 0 0" xyz="0 0 0"/>
-            <inertia ixx="7.166666666666667e-05" ixy="0.0" ixz="0.0" iyy="7.166666666666667e-05" iyz="0.0" izz="9e-05"/>
+            <inertia ixx="6.902466666666668e-05" ixy="0.0" ixz="0.0" iyy="6.902466666666668e-05" iyz="0.0" izz="0.000123904"/>
         </inertial>
     </link>
 
@@ -84,20 +84,20 @@
         <visual>
             <origin rpy="1.5707 0 0" xyz="0 0 0"/>
             <geometry>
-                <cylinder radius="0.03" length="0.04"/>
+                <cylinder radius="0.0352" length="0.0206"/>
             </geometry>
             <material name="black"/>
         </visual>
         <collision>
             <origin rpy="1.5707 0 0" xyz="0 0 0"/>
             <geometry>
-                <cylinder radius="0.03" length="0.04"/>
+                <cylinder radius="0.0352" length="0.0206"/>
             </geometry>
         </collision>
         <inertial>
             <mass value="0.2"/>
             <origin rpy="1.5707 0 0" xyz="0 0 0"/>
-            <inertia ixx="7.166666666666667e-05" ixy="0.0" ixz="0.0" iyy="7.166666666666667e-05" iyz="0.0" izz="9e-05"/>
+            <inertia ixx="6.902466666666668e-05" ixy="0.0" ixz="0.0" iyy="6.902466666666668e-05" iyz="0.0" izz="0.000123904"/>
         </inertial>
     </link>
 
@@ -115,7 +115,7 @@
       <visual>
         <origin rpy="0 1.5707 1.5707" xyz="0 0 0"/>
         <geometry>          
-            <cylinder radius="0.0145" length="0.001"/>
+            <cylinder radius="0.0125000000000000005" length="0.001"/>
         </geometry>
         <material name="blue"/>
       </visual>
@@ -123,14 +123,14 @@
       <collision>
         <origin rpy="0 1.5707 1.5707" xyz="0 0 0"/>
         <geometry>
-            <cylinder radius="0.0145" length="0.001"/>
+            <cylinder radius="0.0125000000000000005" length="0.001"/>
         </geometry>
       </collision>
 
       <inertial>
           <origin rpy="0 1.5707 1.5707" xyz="0 0 0"/>
-          <mass value="0.005"/>
-          <inertia ixx="2.632291666666667e-07" ixy="0" ixz="0" iyy="2.632291666666667e-07" iyz="0" izz="2.632291666666667e-07"/>
+          <mass value="0.001"/>
+          <inertia ixx="3.914583333333334e-08" ixy="0" ixz="0" iyy="3.914583333333334e-08" iyz="0" izz="7.812500000000002e-08"/>
       </inertial>
     </link>
 
@@ -142,7 +142,7 @@
         <visual>
             <origin rpy="0 1.5707 1.5707" xyz="0 0 0"/>
             <geometry>
-                <cylinder radius="0.0145" length="0.001"/>
+                <cylinder radius="0.0125000000000000005" length="0.001"/>
             </geometry>
             <material name="purple"/>
         </visual>
@@ -150,14 +150,14 @@
         <collision>
             <origin rpy="0 1.5707 1.5707" xyz="0 0 0"/>
             <geometry>
-                <cylinder radius="0.0145" length="0.001"/>
+                <cylinder radius="0.0125000000000000005" length="0.001"/>
             </geometry>
         </collision>
 
         <inertial>
             <origin rpy="0 1.5707 1.5707" xyz="0 0 0"/>
-            <mass value="0.005"/>
-            <inertia ixx="2.632291666666667e-07" ixy="0" ixz="0" iyy="2.632291666666667e-07" iyz="0" izz="2.632291666666667e-07"/>
+            <mass value="0.001"/>
+          <inertia ixx="3.914583333333334e-08" ixy="0" ixz="0" iyy="3.914583333333334e-08" iyz="0" izz="7.812500000000002e-08"/>
         </inertial>
     </link>
 
@@ -170,7 +170,7 @@
         <visual>
         <origin rpy="0 1.5707 1.5707" xyz="0 0 0"/>
         <geometry>
-            <sphere radius="0.03"/>
+            <sphere radius="0.0252"/>
         </geometry>
         <material name="green"/>
         </visual>
@@ -178,14 +178,14 @@
         <collision>
         <origin rpy="0 1.5707 1.5707" xyz="0 0 0"/>
         <geometry>
-            <sphere radius="0.03"/>
+            <sphere radius="0.0252"/>
         </geometry>
         </collision>
 
         <inertial>
             <origin rpy="0 1.5707 1.5707" xyz="0 0 0"/>
-            <mass value="0.01"/>
-            <inertia ixx="3.6000000000000003e-06" ixy="0" ixz="0" iyy="3.6000000000000003e-06" iyz="0" izz="3.6000000000000003e-06"/>
+            <mass value="0.1"/>
+            <inertia ixx="2.5401600000000004e-05" ixy="0" ixz="0" iyy="2.5401600000000004e-05" iyz="0" izz="2.5401600000000004e-05"/>
         </inertial>
     </link>
 
@@ -202,7 +202,7 @@
         <visual>
             <origin rpy="0 1.5707 1.5707" xyz="0 0 0"/>
             <geometry>
-                <cylinder radius="0.0145" length="0.001"/>
+                <cylinder radius="0.0125000000000000005" length="0.001"/>
             </geometry>
             <material name="blue"/>
         </visual>
@@ -210,14 +210,14 @@
         <collision>
             <origin rpy="0 1.5707 1.5707" xyz="0 0 0"/>
             <geometry>
-                <cylinder radius="0.0145" length="0.001"/>
+                <cylinder radius="0.0125000000000000005" length="0.001"/>
             </geometry>
         </collision>
 
         <inertial>
             <origin rpy="0 1.5707 1.5707" xyz="0 0 0"/>
-            <mass value="0.005"/>
-                      <inertia ixx="2.632291666666667e-07" ixy="0" ixz="0" iyy="2.632291666666667e-07" iyz="0" izz="2.632291666666667e-07"/>
+            <mass value="0.001"/>
+            <inertia ixx="3.914583333333334e-08" ixy="0" ixz="0" iyy="3.914583333333334e-08" iyz="0" izz="7.812500000000002e-08"/>
         </inertial>
     </link>
 
@@ -229,7 +229,7 @@
         <visual>
             <origin rpy="0 1.5707 1.5707" xyz="0 0 0"/>
             <geometry>
-                <cylinder radius="0.0145" length="0.001"/>
+                <cylinder radius="0.0125000000000000005" length="0.001"/>
             </geometry>
             <material name="red"/>
         </visual>
@@ -237,14 +237,14 @@
         <collision>
             <origin rpy="0 1.5707 1.5707" xyz="0 0 0"/>
             <geometry>
-                <cylinder radius="0.0145" length="0.001"/>
+                <cylinder radius="0.0125000000000000005" length="0.001"/>
             </geometry>
         </collision>
 
         <inertial>
             <origin rpy="0 1.5707 1.5707" xyz="0 0 0"/>
-            <mass value="0.005"/>
-            <inertia ixx="2.632291666666667e-07" ixy="0" ixz="0" iyy="2.632291666666667e-07" iyz="0" izz="2.632291666666667e-07"/>
+            <mass value="0.001"/>
+            <inertia ixx="3.914583333333334e-08" ixy="0" ixz="0" iyy="3.914583333333334e-08" iyz="0" izz="7.812500000000002e-08"/>
         </inertial>
     </link>
 
@@ -256,22 +256,22 @@
         <visual>
         <origin rpy="0 1.5707 1.5707" xyz="0 0 0"/>
         <geometry>
-            <sphere radius="0.03"/>
+            <sphere radius="0.0252"/>
         </geometry>
         <material name="purple"/>
         </visual>
 
         <collision>
-        <origin rpy="0 1.5707 1.5707" xyz="0 0 0"/>
-        <geometry>
-            <sphere radius="0.03"/>
-        </geometry>
+            <origin rpy="0 1.5707 1.5707" xyz="0 0 0"/>
+            <geometry>
+                <sphere radius="0.0252"/>
+            </geometry>
         </collision>
 
         <inertial>
             <origin rpy="0 1.5707 1.5707" xyz="0 0 0"/>
-            <mass value="0.01"/>
-            <inertia ixx="3.6000000000000003e-06" ixy="0" ixz="0" iyy="3.6000000000000003e-06" iyz="0" izz="3.6000000000000003e-06"/>
+            <mass value="0.1"/>
+            <inertia ixx="2.5401600000000004e-05" ixy="0" ixz="0" iyy="2.5401600000000004e-05" iyz="0" izz="2.5401600000000004e-05"/>
         </inertial>
     </link>
 
@@ -412,7 +412,7 @@
     <joint name="base_to_wheel_left" type="continuous">
         <parent link="base_link"/>
         <child link="motorized_wheel_left"/>
-        <origin rpy="0 0 0" xyz="0 0.128 -0.077"/>
+        <origin rpy="0 0 0" xyz="0 0.128 -0.067"/>
         <axis xyz="0 1 0"/>
         <limit effort="1.0" velocity="10.0"/>
         <dynamics damping="0.1" friction="0.1"/>
@@ -421,7 +421,7 @@
     <joint name="base_to_wheel_right" type="continuous">
         <parent link="base_link"/>
         <child link="motorized_wheel_right"/>
-        <origin rpy="0 0 0" xyz="0 -0.128 -0.077"/>
+        <origin rpy="0 0 0" xyz="0 -0.128 -0.067"/>
         <axis xyz="0 1 0"/>
         <limit effort="1.0" velocity="10.0"/>
         <dynamics damping="0.1" friction="0.1"/>
@@ -540,6 +540,32 @@
         </plugin>
     </gazebo>
 
+    <!-- Differential drive -->
+    <gazebo>
+        <plugin name="differential_drive_controller" filename="libgazebo_ros_diff_drive.so">
+
+        <!-- wheels -->
+        <left_joint>base_to_wheel_left</left_joint>
+        <right_joint>base_to_wheel_right</right_joint>
+
+        <!-- kinematics -->
+        <wheel_separation>0.256</wheel_separation>
+        <wheel_diameter>0.06</wheel_diameter>
+
+        <!-- limits -->
+        <max_wheel_torque>1.0</max_wheel_torque>
+        <max_wheel_acceleration>2.0</max_wheel_acceleration>
+
+        <!-- output -->
+        <publish_odom>true</publish_odom>
+        <publish_odom_tf>true</publish_odom_tf>
+
+        <odometry_frame>odom</odometry_frame>
+        <robot_base_frame>base_link</robot_base_frame>
+
+        </plugin>
+    </gazebo>
+
     <!-- This plugin simulates the laser scanner sensor in Gazebo and publishes LaserScan data -->
     <gazebo reference="laser_scan_frame_link">
         <sensor name="sensor_ray" type="ray">
@@ -563,7 +589,6 @@
             <update_rate>30.0</update_rate>
             <plugin name="laser" filename="libgazebo_ros_ray_sensor.so">
                 <ros>
-                    <namespace>/barista_robot</namespace>
                     <remapping>~/out:=scan</remapping>
                 </ros>
                 <output_type>sensor_msgs/LaserScan</output_type>

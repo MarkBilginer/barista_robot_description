@@ -7,13 +7,12 @@ Panels:
         - /Global Options1
         - /Status1
         - /RobotModel1
-        - /RobotModel1/Mass Properties1
         - /RobotModel1/Description Topic1
         - /TF1
         - /LaserScan1
         - /LaserScan1/Topic1
       Splitter Ratio: 0.5
-    Tree Height: 553
+    Tree Height: 558
   - Class: rviz_common/Selection
     Name: Selection
   - Class: rviz_common/Tool Properties
@@ -53,7 +52,7 @@ Visualization Manager:
       Plane Cell Count: 10
       Reference Frame: <Fixed Frame>
       Value: true
-    - Alpha: 0.6000000238418579
+    - Alpha: 1
       Class: rviz_default_plugins/RobotModel
       Collision Enabled: false
       Description File: ""
@@ -106,6 +105,10 @@ Visualization Manager:
           Show Axes: false
           Show Trail: false
           Value: true
+        laser_scan_frame_link:
+          Alpha: 1
+          Show Axes: false
+          Show Trail: false
         laser_scan_link:
           Alpha: 1
           Show Axes: false
@@ -168,11 +171,15 @@ Visualization Manager:
           Value: true
         front_yaw_link:
           Value: true
+        laser_scan_frame_link:
+          Value: true
         laser_scan_link:
           Value: true
         motorized_wheel_left:
           Value: true
         motorized_wheel_right:
+          Value: true
+        odom:
           Value: true
         standoff_rod_1:
           Value: true
@@ -182,42 +189,44 @@ Visualization Manager:
           Value: true
         standoff_rod_4:
           Value: true
-      Marker Scale: 0.6000000238418579
+      Marker Scale: 0.30000001192092896
       Name: TF
       Show Arrows: true
       Show Axes: true
-      Show Names: true
+      Show Names: false
       Tree:
-        base_link:
-          back_yaw_link:
-            back_roll_link:
-              back_pitch_link:
+        odom:
+          base_link:
+            back_yaw_link:
+              back_roll_link:
+                back_pitch_link:
+                  {}
+            front_yaw_link:
+              front_roll_link:
+                front_pitch_link:
+                  {}
+            laser_scan_link:
+              laser_scan_frame_link:
                 {}
-          front_yaw_link:
-            front_roll_link:
-              front_pitch_link:
-                {}
-          laser_scan_link:
-            {}
-          motorized_wheel_left:
-            {}
-          motorized_wheel_right:
-            {}
-          standoff_rod_1:
-            {}
-          standoff_rod_2:
-            {}
-          standoff_rod_3:
-            {}
-          standoff_rod_4:
-            {}
+            motorized_wheel_left:
+              {}
+            motorized_wheel_right:
+              {}
+            standoff_rod_1:
+              {}
+            standoff_rod_2:
+              {}
+            standoff_rod_3:
+              {}
+            standoff_rod_4:
+              {}
       Update Interval: 0
       Value: true
     - Alpha: 1
       Autocompute Intensity Bounds: true
       Autocompute Value Bounds:
-        Max Value: 0.07750000059604645
-        Min Value: 0.07750000059604645
+        Max Value: 0
+        Min Value: 0
         Value: true
       Axis: Z
       Channel Name: intensity
@@ -235,7 +244,7 @@ Visualization Manager:
       Position Transformer: XYZ
       Selectable: true
       Size (Pixels): 3
-      Size (m): 0.029999999329447746
+      Size (m): 0.03999999910593033
       Style: Flat Squares
       Topic:
         Depth: 5
@@ -243,7 +252,7 @@ Visualization Manager:
         Filter size: 10
         History Policy: Keep Last
         Reliability Policy: Best Effort
-        Value: /barista_robot/scan
+        Value: /scan
       Use Fixed Frame: true
       Use rainbow: true
       Value: true
@@ -293,7 +302,7 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz_default_plugins/Orbit
-      Distance: 0.7569471001625061
+      Distance: 10
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.05999999865889549
         Stereo Focal Distance: 1
@@ -308,10 +317,10 @@ Visualization Manager:
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.009999999776482582
-      Pitch: 0.6153979301452637
+      Pitch: 0.785398006439209
       Target Frame: <Fixed Frame>
       Value: Orbit (rviz)
-      Yaw: 1.570393681526184
+      Yaw: 0.785398006439209
     Saved: ~
 Window Geometry:
   Displays:
@@ -319,7 +328,7 @@ Window Geometry:
   Height: 851
   Hide Left Dock: false
   Hide Right Dock: false
-  QMainWindow State: 000000ff00000000fd000000040000000000000156000002b4fc0200000008fb0000001200530065006c0065006300740069006f006e00000001e10000009b0000005d00fffffffb0000001e0054006f006f006c002000500072006f007000650072007400690065007302000001ed000001df00000185000000a3fb000000120056006900650077007300200054006f006f02000001df000002110000018500000122fb000000200054006f006f006c002000500072006f0070006500720074006900650073003203000002880000011d000002210000017afb000000100044006900730070006c006100790073010000003e000002b4000000cb00fffffffb0000002000730065006c0065006300740069006f006e00200062007500660066006500720200000138000000aa0000023a00000294fb00000014005700690064006500530074006500720065006f02000000e6000000d2000003ee0000030bfb0000000c004b0069006e0065006300740200000186000001060000030c00000261000000010000010f000002b4fc0200000003fb0000001e0054006f006f006c002000500072006f00700065007200740069006500730100000041000000780000000000000000fb0000000a00560069006500770073010000003e000002b4000000a500fffffffb0000001200530065006c0065006300740069006f006e010000025a000000b200000000000000000000000200000490000000a9fc0100000001fb0000000a00560069006500770073030000004e00000080000002e10000019700000003000006400000003efc0100000002fb0000000800540069006d00650100000000000006400000027900fffffffb0000000800540069006d00650100000000000004500000000000000000000003cf000002b400000004000000040000000800000008fc0000000100000002000000010000000a0054006f006f006c00730100000000ffffffff0000000000000000
+  QMainWindow State: 000000ff00000000fd000000040000000000000156000002b9fc0200000008fb0000001200530065006c0065006300740069006f006e00000001e10000009b0000005d00fffffffb0000001e0054006f006f006c002000500072006f007000650072007400690065007302000001ed000001df00000185000000a3fb000000120056006900650077007300200054006f006f02000001df000002110000018500000122fb000000200054006f006f006c002000500072006f0070006500720074006900650073003203000002880000011d000002210000017afb000000100044006900730070006c006100790073010000003e000002b9000000cb00fffffffb0000002000730065006c0065006300740069006f006e00200062007500660066006500720200000138000000aa0000023a00000294fb00000014005700690064006500530074006500720065006f02000000e6000000d2000003ee0000030bfb0000000c004b0069006e0065006300740200000186000001060000030c00000261000000010000010f000002b9fc0200000003fb0000001e0054006f006f006c002000500072006f00700065007200740069006500730100000041000000780000000000000000fb0000000a00560069006500770073010000003e000002b9000000a500fffffffb0000001200530065006c0065006300740069006f006e010000025a000000b200000000000000000000000200000490000000a9fc0100000001fb0000000a00560069006500770073030000004e00000080000002e100000197000000030000064000000039fc0100000002fb0000000800540069006d00650100000000000006400000027900fffffffb0000000800540069006d00650100000000000004500000000000000000000003cf000002b900000004000000040000000800000008fc0000000100000002000000010000000a0054006f006f006c00730100000000ffffffff0000000000000000
   Selection:
     collapsed: false
   Time:
