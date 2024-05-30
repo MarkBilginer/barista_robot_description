@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="barista_robot">
+
+    <xacro:property name="standoff_rod_length" value="0.26"/>
+    <xacro:property name="standoff_rod_radius" value="0.01"/>
+
+    <!-- Standoff rod Macro -->
+    <xacro:macro name="standoff_rod" params="standoff_rod_name">
+        <link name="${standoff_rod_name}">
+            <visual>
+                <geometry>
+                    <cylinder radius="${standoff_rod_radius}" length="${standoff_rod_length}"/>
+                </geometry>
+                <material name="green"/>
+            </visual>
+            <collision>
+                <geometry>
+                    <cylinder radius="${standoff_rod_radius}" length="${standoff_rod_length}"/>
+                </geometry>
+            </collision>
+            <inertial>
+                <mass value="0.05"/>
+                <origin xyz="0 0 0.13"/>
+                <inertia ixx="0.00028291666666666667" ixy="0.0" ixz="0.0" iyy="0.00028291666666666667" iyz="0.0" izz="2.5e-06"/>
+            </inertial>
+        </link>
+    </xacro:macro>
+
+</robot>

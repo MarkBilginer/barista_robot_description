@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<robot xmlns:xacro="http://www.ros.org/wiki/xacro" name="barista_robot">
+
+    <xacro:property name="wheel_width" value="0.0206"/>
+    <xacro:property name="wheel_radius" value="0.0352"/>
+
+    <!-- Wheel Macro -->
+    <xacro:macro name="wheel" params="wheel_name">
+        <link name="${wheel_name}">    
+            <visual>
+                <origin rpy="1.5707 0 0" xyz="0 0 0"/>
+                <geometry>
+                <cylinder length="${wheel_width}" radius="${wheel_radius}"/>
+                </geometry>
+            </visual>
+
+            <collision>
+                <origin rpy="1.5707 0 0" xyz="0 0 0"/>
+                <geometry>
+                <cylinder length="${wheel_width}" radius="${wheel_radius}"/>
+                </geometry>
+            </collision>
+
+            <inertial>
+                <mass value="0.2"/>
+                <origin rpy="1.5707 0 0" xyz="0 0 0"/>
+                <inertia ixx="6.902466666666668e-05" ixy="0.0" ixz="0.0" iyy="6.902466666666668e-05" iyz="0.0" izz="0.000123904"/>
+            </inertial>
+        </link>
+    </xacro:macro>
+
+</robot>

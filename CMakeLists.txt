@@ -34,6 +34,7 @@ install(
 	rviz
 	meshes
 	gazebo
+	xacro
   DESTINATION
     share/${PROJECT_NAME}/
 )
