@@ -11,8 +11,12 @@ find_package(rclpy REQUIRED)
 find_package(urdf REQUIRED)
 find_package(xacro REQUIRED)
 find_package(gazebo_ros REQUIRED)
+find_package(tf2_ros REQUIRED)
 find_package(robot_state_publisher REQUIRED)
 find_package(joint_state_broadcaster REQUIRED)
+find_package(geometry_msgs REQUIRED)
+find_package(nav_msgs REQUIRED)
+find_package(sensor_msgs REQUIRED)
 
 
 if(BUILD_TESTING)
@@ -37,6 +41,12 @@ install(
 	xacro
   DESTINATION
     share/${PROJECT_NAME}/
+)
+
+install(PROGRAMS
+  scripts/dual_odom_to_tf_broadcaster.py
+  scripts/single_odom_to_tf_broadcaster.py
+  DESTINATION lib/${PROJECT_NAME}
 )
 
 ament_package()

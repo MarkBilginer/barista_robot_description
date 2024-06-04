@@ -11,7 +11,7 @@
                 <geometry>
                     <cylinder length="${cup_holder_tray_length}" radius="${cup_holder_tray_radius}"/>
                 </geometry>
-                <material name="blue"/>
+                <material name="cup_holder_tray"/>
             </visual>
 
             <collision>
