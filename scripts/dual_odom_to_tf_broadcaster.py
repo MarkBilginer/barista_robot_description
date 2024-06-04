@@ -70,6 +70,7 @@ class DualOdomToTF(Node):
         self.update_transforms(odom_msg, robot_name)
 
     def update_transforms(self, odom_msg, robot_name):
+
         # Update odom transform
         odom_transform = self.transforms[f"{robot_name}/odom"]
         odom_transform.header.stamp = odom_msg.header.stamp
