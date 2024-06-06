@@ -20,11 +20,6 @@ class DualOdomToTF(Node):
         qos_reliable = QoSProfile(depth=10, reliability=ReliabilityPolicy.RELIABLE, durability=DurabilityPolicy.VOLATILE)
 
         for robot_name in self.robot_names:
-            # Transform from world to odom
-            transform_odom = TransformStamped()
-            transform_odom.header.frame_id = "world"
-            transform_odom.child_frame_id = f"{robot_name}/odom"
-            self.transforms[f"{robot_name}/odom"] = transform_odom
 
             # Transform from odom to base_link
             transform_base = TransformStamped()
@@ -43,41 +38,21 @@ class DualOdomToTF(Node):
                 qos_reliable
             )
 
-            # Subscribe to the laser scan topic
-            self.create_subscription(
-                LaserScan,
-                f"{robot_name}/scan",
-                lambda msg, rn=robot_name: self.scan_callback(msg, rn),
-                qos_reliable
-            )
-
         # Timer set to call broadcast_transforms at a 0.1-second interval
-        self.timer = self.create_timer(0.1, self.broadcast_transforms)
+        self.timer = self.create_timer(0.05, self.broadcast_transforms)
 
         self.get_logger().info("Dual robot odom to TF broadcaster node is ready!")
 
     def broadcast_transforms(self):
         for robot_name in self.robot_names:
             broadcaster = self.broadcasters[robot_name]
-            broadcaster.sendTransform(self.transforms[f"{robot_name}/odom"])
             broadcaster.sendTransform(self.transforms[f"{robot_name}/base_link"])
 
-    def scan_callback(self, scan_msg, robot_name):
-        # Log or process the incoming laser scan data
-        self.get_logger().info(f'Received scan from {robot_name}: {len(scan_msg.ranges)} ranges')
 
     def odom_callback(self, odom_msg, robot_name):
         self.update_transforms(odom_msg, robot_name)
 
     def update_transforms(self, odom_msg, robot_name):
-
-        # Update odom transform
-        odom_transform = self.transforms[f"{robot_name}/odom"]
-        odom_transform.header.stamp = odom_msg.header.stamp
-        odom_transform.transform.translation.x = 0.0
-        odom_transform.transform.translation.y = 0.0
-        odom_transform.transform.translation.z = 0.0
-        odom_transform.transform.rotation = odom_msg.pose.pose.orientation
 
         # Update base_link transform
         base_transform = self.transforms[f"{robot_name}/base_link"]
@@ -87,23 +62,9 @@ class DualOdomToTF(Node):
         base_transform.transform.translation.z = odom_msg.pose.pose.position.z
         base_transform.transform.rotation = odom_msg.pose.pose.orientation
 
- #   def update_transforms(self, odom_msg, robot_name):
-  #      # Update odom transform
-   #     odom_transform = self.transforms[f"{robot_name}/odom"]
-    #    odom_transform.header.stamp = odom_msg.header.stamp
-    #    odom_transform.transform.translation.x = odom_msg.pose.pose.position.x
-    #    odom_transform.transform.translation.y = odom_msg.pose.pose.position.y
-    #    odom_transform.transform.translation.z = odom_msg.pose.pose.position.z
-    #    odom_transform.transform.rotation = odom_msg.pose.pose.orientation
+        # Log transform updates for debugging
+        self.get_logger().debug(f'Updated transform for {robot_name} at time {odom_msg.header.stamp.sec}.{odom_msg.header.stamp.nanosec}')
 
-        # Update base_link transform
-    # Since odom and base_link are coincident, we reset base_link's relative pose
-      #  base_transform = self.transforms[f"{robot_name}/base_link"]
-     #   base_transform.header.stamp = odom_msg.header.stamp
-       # base_transform.transform.translation.x = 0.0
-        #base_transform.transform.translation.y = 0.0
-        #base_transform.transform.translation.z = 0.0
-        #base_transform.transform.rotation = odom_msg.pose.pose.orientation 
 
 def main(args=None):
     rclpy.init(args=args)

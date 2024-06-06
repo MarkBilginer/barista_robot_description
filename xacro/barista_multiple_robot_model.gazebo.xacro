@@ -114,13 +114,15 @@
                     <remapping>/cmd_vel:=cmd_vel</remapping>
                 </ros>
 
+            <update_rate>30</update_rate>
+            
             <!-- wheels -->
             <left_joint>base_to_wheel_left</left_joint>
             <right_joint>base_to_wheel_right</right_joint>
 
             <!-- kinematics -->
             <wheel_separation>0.256</wheel_separation>
-            <wheel_diameter>0.06</wheel_diameter>
+            <wheel_diameter>0.0704</wheel_diameter>
             <publish_odom>true</publish_odom>
 
             <!-- TF frames -->

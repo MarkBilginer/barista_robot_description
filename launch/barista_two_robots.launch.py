@@ -1,29 +1,34 @@
 import os
-from ament_index_python.packages import get_package_share_directory
+from ament_index_python.packages import get_package_share_directory, PackageNotFoundError
 from launch import LaunchDescription
 from launch.substitutions import Command, LaunchConfiguration
-from launch.actions import DeclareLaunchArgument, IncludeLaunchDescription
+from launch.actions import DeclareLaunchArgument, IncludeLaunchDescription, TimerAction, LogInfo
 from launch.launch_description_sources import PythonLaunchDescriptionSource
 from launch_ros.actions import Node
 from ament_index_python.packages import get_package_prefix
 
-import xacro
 
+def check_package_availability(package_name):
+    try:
+        return get_package_share_directory(package_name)
+    except PackageNotFoundError:
+        print(f"Package not found: {package_name}. Please install the package and try again.")
+        raise
 
 def generate_launch_description():
 
         ####### DATA INPUT ##########
     xacro_file = 'barista_multiple_robot_model.urdf.xacro'
     package_description = "barista_robot_description"
-
+    
     # Paths
-    pkg_barista_robot_description = get_package_share_directory(package_description)
+    pkg_barista_robot_description = check_package_availability('barista_robot_description')
     install_dir = get_package_prefix(package_description)
 
     print("Resolved package path for barista_robot_description: ", pkg_barista_robot_description)
 
      # Setting up Gazebo environment variables
-    pkg_gazebo_ros = get_package_share_directory('gazebo_ros')
+    pkg_gazebo_ros = check_package_availability('gazebo_ros')
     gazebo_models_path = os.path.join(pkg_barista_robot_description, 'models')
 
     if 'GAZEBO_MODEL_PATH' in os.environ:
@@ -41,7 +46,7 @@ def generate_launch_description():
 
     world_file_arg = DeclareLaunchArgument(
         'world',
-        default_value=[get_package_share_directory('barista_robot_description'), 'gazebo/worlds/barista_robot_empty.world'],
+        default_value=os.path.join(get_package_share_directory('barista_robot_description'), 'gazebo', 'worlds', 'barista_robot_empty.world'),
         description= "barista_robot_empty_world",
     )
     # Define the launch arguments for the Gazebo launch file
@@ -53,9 +58,10 @@ def generate_launch_description():
 
     # Include the Gazebo launch file with the modified launch arguments
     gazebo = IncludeLaunchDescription(
-        PythonLaunchDescriptionSource([os.path.join(
-            get_package_share_directory('gazebo_ros'), 'launch'), '/gazebo.launch.py']),
-        launch_arguments=gazebo_launch_args.items(),
+        PythonLaunchDescriptionSource(
+                os.path.join(get_package_share_directory('gazebo_ros'), 'launch', 'gazebo.launch.py')
+            ),
+        launch_arguments=list(gazebo_launch_args.items()),
     )
 
     ####### DATA INPUT END ##########
@@ -104,7 +110,7 @@ def generate_launch_description():
         executable='spawn_entity.py',
         name="spawn_entity_node1",
         namespace=robot_name_1,
-        arguments=['-entity', robot_name_1, '-x', '-1.5', '-y', '-1.5', '-z', '0.0', '-topic', 'robot_description'],
+        arguments=['-entity', robot_name_1, '-x', '-1.5' , '-y','-1.5', '-z', '0.0', '-topic', 'robot_description'],
         output='screen'
     )
 
@@ -113,35 +119,70 @@ def generate_launch_description():
         executable='spawn_entity.py',
         name="spawn_entity_node2",
         namespace=robot_name_2,
-        arguments=['-entity', robot_name_2, '-x', '1.5', '-y', '1.5', '-z', '0.0', '-topic', 'robot_description'],
+        arguments=['-entity', robot_name_2, '-x', '1.5' , '-y','1.5', '-z', '0.0', '-topic', 'robot_description'],
         output='screen'
     )
 
-    #static_robot_publisher1 = Node(
-    #        package='tf2_ros',
-    #        executable='static_transform_publisher',
-    #        name='robot1_tf_publisher',
-    #        output='screen',
-    #        emulate_tty=True,
-    #        arguments=['1', '0', '0', '0', '0', '0', 'world', robot_name_1 + '/odom']
-    #    )
+    static_tf_pub1 = Node(
+        package='tf2_ros',
+        executable='static_transform_publisher',
+        name='static_transform_publisher_barista_odom1',
+        output='screen',
+        emulate_tty=True,
+        arguments=['0', '0', '0', '0', '0', '0', 'world', robot_name_1 + '/odom']
+    )
 
-    #static_robot_publisher2 = Node(
-    #        package='tf2_ros',
-    #        executable='static_transform_publisher',
-    #        name='robot2_tf_publisher',
-    #        output='screen',
-    #        emulate_tty=True,
-    #        arguments=['2', '0', '0', '0', '0', '0', 'world', robot_name_2 + '/odom']
-    #    )
+    static_tf_pub2 = Node(
+        package='tf2_ros',
+        executable='static_transform_publisher',
+        name='static_transform_publisher_barista_odom2',
+        output='screen',
+        emulate_tty=True,
+        arguments=['0', '0', '0', '0', '0', '0', 'world', robot_name_2 + '/odom']
+    )
+
+    # DualOdomToTF node configuration
+    dual_odom_to_tf_node = Node(
+        package='barista_robot_description',
+        executable='dual_odom_to_tf_broadcaster.py',
+        name='dual_odom_to_tf_broadcaster_node',
+        output='screen'
+    )
 
 
     return LaunchDescription([
+
         world_file_arg,
         gazebo,
-        robot_state_publisher_node1,
-        robot_state_publisher_node2,
-        rviz_node,
-        spawn_entity_node1,
-        spawn_entity_node2
+        LogInfo(msg="Starting setup for robot_state_publisher_node1"),
+        TimerAction(period=3.0, actions=[robot_state_publisher_node1]),
+        LogInfo(msg="Finished setup for robot_state_publisher_node1"),
+
+        LogInfo(msg="Starting setup for robot_state_publisher_node2"),
+        TimerAction(period=6.0, actions=[robot_state_publisher_node2]),
+        LogInfo(msg="Finished setup for robot_state_publisher_node2"),
+
+        LogInfo(msg="Starting setup for rviz_node"),
+        TimerAction(period=9.0, actions=[rviz_node]),
+        LogInfo(msg="Finished setup for rviz_node"),
+
+        LogInfo(msg="Starting setup for spawn_entity_node1"),
+        TimerAction(period=12.0, actions=[spawn_entity_node1]),
+        LogInfo(msg="Finished setup for spawn_entity_node1"),
+
+        LogInfo(msg="Starting setup for spawn_entity_node2"),
+        TimerAction(period=15.0, actions=[spawn_entity_node2]),
+        LogInfo(msg="Finished setup for spawn_entity_node2"),
+
+        LogInfo(msg="Starting setup for static_tf_pub1"),
+        TimerAction(period=18.0, actions=[static_tf_pub1]),
+        LogInfo(msg="Finished setup for static_tf_pub1"),
+
+        LogInfo(msg="Starting setup for static_tf_pub2"),
+        TimerAction(period=21.0, actions=[static_tf_pub2]),
+        LogInfo(msg="Finished setup for static_tf_pub2"),
+
+        LogInfo(msg="Starting setup for dual_odom_to_tf_node"),
+        TimerAction(period=24.0, actions=[dual_odom_to_tf_node]),
+        LogInfo(msg="Finished setup for dual_odom_to_tf_node")
     ])
