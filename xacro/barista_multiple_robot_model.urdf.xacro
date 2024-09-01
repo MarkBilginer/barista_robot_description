@@ -220,7 +220,7 @@
         <origin rpy="0 0 0" xyz="0 0.128 -0.067"/>
         <axis xyz="0 1 0"/>
         <limit effort="10000" velocity="1000"/>
-        <dynamics damping="1.0" friction="1.0"/>
+        <dynamics damping="1.0" friction="3.0"/>
     </joint>
 
     <joint name="base_to_wheel_right" type="continuous">
@@ -229,7 +229,7 @@
         <origin rpy="0 0 0" xyz="0 -0.128 -0.067"/>
         <axis xyz="0 1 0"/>
         <limit effort="10000" velocity="1000"/>
-        <dynamics damping="1.0" friction="1.0"/>
+        <dynamics damping="1.0" friction="3.0"/>
     </joint>
 
     <!-- Caster Wheels -->

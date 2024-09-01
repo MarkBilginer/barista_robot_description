@@ -46,16 +46,16 @@
         <gazebo reference="motorized_wheel_left">
             <kp>1000000000000000000000000000.0</kp>
             <kd>1000000000000000000000000000.0</kd>
-            <mu1>50.0</mu1>
-            <mu2>50.0</mu2>
+            <mu1>100.0</mu1>
+            <mu2>100.0</mu2>
             <material>Gazebo/Green</material>
         </gazebo>
 
         <gazebo reference="motorized_wheel_right">
             <kp>1000000000000000000000000000.0</kp>
             <kd>1000000000000000000000000000.0</kd>
-            <mu1>50.0</mu1>
-            <mu2>50.0</mu2>
+            <mu1>100.0</mu1>
+            <mu2>100.0</mu2>
             <material>Gazebo/Green</material>
         </gazebo>
 
@@ -114,7 +114,7 @@
                     <remapping>/cmd_vel:=cmd_vel</remapping>
                 </ros>
 
-            <update_rate>50</update_rate>
+            <update_rate>50.0</update_rate>
             
             <!-- wheels -->
             <left_joint>base_to_wheel_left</left_joint>
@@ -132,9 +132,8 @@
             <publish_wheel_tf>false</publish_wheel_tf>
 
             <!-- limits -->
-            <max_wheel_torque>10.0</max_wheel_torque>
-            <max_wheel_acceleration>5.0</max_wheel_acceleration>
-
+            <max_wheel_torque>7.0</max_wheel_torque>
+            <max_wheel_acceleration>2.0</max_wheel_acceleration>
 
             </plugin>
         </gazebo>
@@ -208,7 +207,7 @@
                     </ray>
                     <always_on>true</always_on>
                     <visualize>true</visualize>
-                    <update_rate>30.0</update_rate>
+                    <update_rate>50.0</update_rate>
                     <plugin name="laser" filename="libgazebo_ros_ray_sensor.so">
                         <ros>
                             <namespace>${robot_name}</namespace>
@@ -229,7 +228,7 @@
                     <namespace>/${robot_name}</namespace>
                     <remapping>~/out:=joint_states</remapping>
                 </ros>
-                <update_rate>30</update_rate>
+                <update_rate>50.0</update_rate>
 
                 <joint_name>base_to_wheel_left</joint_name>
                 <joint_name>base_to_wheel_right</joint_name>

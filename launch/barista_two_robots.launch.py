@@ -95,13 +95,14 @@ def generate_launch_description():
 
     # RVIZ Configuration
     rviz_config_dir = os.path.join(get_package_share_directory(package_description), 'rviz', 'rick_and_morty_vis.rviz')
-
+    # rviz_config_dir = os.path.join(get_package_share_directory(package_description), 'rviz', 'multiple_robot_model_vis_qos_diff.rviz')
+    
     rviz_node = Node(
             package='rviz2',
             executable='rviz2',
             name='rviz_node',
             output='screen',
-            parameters=[{'use_sim_time': True}],
+            parameters=[{'use_sim_time': True, 'queue_size': 100}],
             arguments=['-d', rviz_config_dir])
 
     # Spawn Entity Node
@@ -155,34 +156,34 @@ def generate_launch_description():
         world_file_arg,
         gazebo,
         LogInfo(msg="Starting setup for robot_state_publisher_node1"),
-        TimerAction(period=3.0, actions=[robot_state_publisher_node1]),
+        TimerAction(period=20.0, actions=[robot_state_publisher_node1]),
         LogInfo(msg="Finished setup for robot_state_publisher_node1"),
 
         LogInfo(msg="Starting setup for robot_state_publisher_node2"),
-        TimerAction(period=6.0, actions=[robot_state_publisher_node2]),
+        TimerAction(period=25.0, actions=[robot_state_publisher_node2]),
         LogInfo(msg="Finished setup for robot_state_publisher_node2"),
 
-        LogInfo(msg="Starting setup for rviz_node"),
-        TimerAction(period=9.0, actions=[rviz_node]),
-        LogInfo(msg="Finished setup for rviz_node"),
-
-        LogInfo(msg="Starting setup for spawn_entity_node1"),
-        TimerAction(period=12.0, actions=[spawn_entity_node1]),
-        LogInfo(msg="Finished setup for spawn_entity_node1"),
-
-        LogInfo(msg="Starting setup for spawn_entity_node2"),
-        TimerAction(period=15.0, actions=[spawn_entity_node2]),
-        LogInfo(msg="Finished setup for spawn_entity_node2"),
-
         LogInfo(msg="Starting setup for static_tf_pub1"),
-        TimerAction(period=18.0, actions=[static_tf_pub1]),
+        TimerAction(period=28.0, actions=[static_tf_pub1]),
         LogInfo(msg="Finished setup for static_tf_pub1"),
 
         LogInfo(msg="Starting setup for static_tf_pub2"),
-        TimerAction(period=21.0, actions=[static_tf_pub2]),
+        TimerAction(period=31.0, actions=[static_tf_pub2]),
         LogInfo(msg="Finished setup for static_tf_pub2"),
 
         LogInfo(msg="Starting setup for dual_odom_to_tf_node"),
-        TimerAction(period=24.0, actions=[dual_odom_to_tf_node]),
-        LogInfo(msg="Finished setup for dual_odom_to_tf_node")
+        TimerAction(period=34.0, actions=[dual_odom_to_tf_node]),
+        LogInfo(msg="Finished setup for dual_odom_to_tf_node"),
+
+        LogInfo(msg="Starting setup for spawn_entity_node1"),
+        TimerAction(period=39.0, actions=[spawn_entity_node1]),
+        LogInfo(msg="Finished setup for spawn_entity_node1"),
+
+        LogInfo(msg="Starting setup for spawn_entity_node2"),
+        TimerAction(period=44.0, actions=[spawn_entity_node2]),
+        LogInfo(msg="Finished setup for spawn_entity_node2"),
+
+        LogInfo(msg="Starting setup for rviz_node"),
+        TimerAction(period=47.0, actions=[rviz_node]),
+        LogInfo(msg="Finished setup for rviz_node"),
     ])

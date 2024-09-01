@@ -18,29 +18,10 @@ class DualOdomToTF(Node):
         # Using reliable QoS for critical data
         qos_reliable = QoSProfile(depth=10, reliability=ReliabilityPolicy.RELIABLE, durability=DurabilityPolicy.VOLATILE)
 
-        # Create a static transform broadcaster for the static transforms
-        self.static_broadcaster = tf2_ros.StaticTransformBroadcaster(self)
-
         for robot_name in self.robot_names:
 
             # Single broadcaster for dynamic transforms
             self.broadcasters[robot_name] = tf2_ros.TransformBroadcaster(self)
-
-            # Static transform from world to odom
-            transform_world_to_odom = TransformStamped()
-            transform_world_to_odom.header.stamp = self.get_clock().now().to_msg()
-            transform_world_to_odom.header.frame_id = "world"
-            transform_world_to_odom.child_frame_id = f"{robot_name}/odom"
-            transform_world_to_odom.transform.translation.x = 0.0
-            transform_world_to_odom.transform.translation.y = 0.0
-            transform_world_to_odom.transform.translation.z = 0.0
-            transform_world_to_odom.transform.rotation.x = 0.0
-            transform_world_to_odom.transform.rotation.y = 0.0
-            transform_world_to_odom.transform.rotation.z = 0.0
-            transform_world_to_odom.transform.rotation.w = 1.0
-
-            # Broadcast the static transform
-            self.static_broadcaster.sendTransform(transform_world_to_odom)
 
             # Dynamic transform from odom to base_link
             transform_base = TransformStamped()
@@ -56,10 +37,10 @@ class DualOdomToTF(Node):
                 qos_reliable
             )
 
-        # Timer set to call broadcast_transforms at a 0.1-second interval
-        self.timer = self.create_timer(0.05, self.broadcast_transforms)
+        # Timer set to call broadcast_transforms at a 0.05-second interval
+        self.timer = self.create_timer(0.02, self.broadcast_transforms)
 
-        self.get_logger().info("Dual robot odom to TF broadcaster node is ready!")
+        self.get_logger().info("Dual robot odom to TF broadcaster node is initialized!")
 
     def broadcast_transforms(self):
         for robot_name in self.robot_names:
