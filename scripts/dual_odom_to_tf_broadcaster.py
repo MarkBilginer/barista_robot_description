@@ -6,7 +6,6 @@ from rclpy.qos import ReliabilityPolicy, DurabilityPolicy, QoSProfile
 import tf2_ros
 from geometry_msgs.msg import TransformStamped
 from nav_msgs.msg import Odometry
-from sensor_msgs.msg import LaserScan
 
 class DualOdomToTF(Node):
     def __init__(self):
@@ -19,16 +18,35 @@ class DualOdomToTF(Node):
         # Using reliable QoS for critical data
         qos_reliable = QoSProfile(depth=10, reliability=ReliabilityPolicy.RELIABLE, durability=DurabilityPolicy.VOLATILE)
 
+        # Create a static transform broadcaster for the static transforms
+        self.static_broadcaster = tf2_ros.StaticTransformBroadcaster(self)
+
         for robot_name in self.robot_names:
 
-            # Transform from odom to base_link
+            # Single broadcaster for dynamic transforms
+            self.broadcasters[robot_name] = tf2_ros.TransformBroadcaster(self)
+
+            # Static transform from world to odom
+            transform_world_to_odom = TransformStamped()
+            transform_world_to_odom.header.stamp = self.get_clock().now().to_msg()
+            transform_world_to_odom.header.frame_id = "world"
+            transform_world_to_odom.child_frame_id = f"{robot_name}/odom"
+            transform_world_to_odom.transform.translation.x = 0.0
+            transform_world_to_odom.transform.translation.y = 0.0
+            transform_world_to_odom.transform.translation.z = 0.0
+            transform_world_to_odom.transform.rotation.x = 0.0
+            transform_world_to_odom.transform.rotation.y = 0.0
+            transform_world_to_odom.transform.rotation.z = 0.0
+            transform_world_to_odom.transform.rotation.w = 1.0
+
+            # Broadcast the static transform
+            self.static_broadcaster.sendTransform(transform_world_to_odom)
+
+            # Dynamic transform from odom to base_link
             transform_base = TransformStamped()
             transform_base.header.frame_id = f"{robot_name}/odom"
             transform_base.child_frame_id = f"{robot_name}/base_link"
             self.transforms[f"{robot_name}/base_link"] = transform_base
-
-            # Single broadcaster for all transforms
-            self.broadcasters[robot_name] = tf2_ros.TransformBroadcaster(self)
 
             # Subscriber for each robot's odometry
             self.create_subscription(

@@ -46,16 +46,16 @@
         <gazebo reference="motorized_wheel_left">
             <kp>1000000000000000000000000000.0</kp>
             <kd>1000000000000000000000000000.0</kd>
-            <mu1>10.0</mu1>
-            <mu2>10.0</mu2>
+            <mu1>50.0</mu1>
+            <mu2>50.0</mu2>
             <material>Gazebo/Green</material>
         </gazebo>
 
         <gazebo reference="motorized_wheel_right">
             <kp>1000000000000000000000000000.0</kp>
             <kd>1000000000000000000000000000.0</kd>
-            <mu1>10.0</mu1>
-            <mu2>10.0</mu2>
+            <mu1>50.0</mu1>
+            <mu2>50.0</mu2>
             <material>Gazebo/Green</material>
         </gazebo>
 
@@ -70,8 +70,8 @@
         <gazebo reference="front_pitch_link">
             <kp>1000000000000000000000000000.0</kp>
             <kd>1000000000000000000000000000.0</kd>
-            <mu1>0.5</mu1>
-            <mu2>0.5</mu2>
+            <mu1>1.5</mu1>
+            <mu2>1.5</mu2>
             <material>Gazebo/Purple</material>
         </gazebo>
 
@@ -86,8 +86,8 @@
         <gazebo reference="back_pitch_link">
             <kp>1000000000000000000000000000.0</kp>
             <kd>1000000000000000000000000000.0</kd>
-            <mu1>0.5</mu1>
-            <mu2>0.5</mu2>
+            <mu1>1.5</mu1>
+            <mu2>1.5</mu2>
             <material>Gazebo/Yellow</material>
         </gazebo>
 
@@ -114,7 +114,7 @@
                     <remapping>/cmd_vel:=cmd_vel</remapping>
                 </ros>
 
-            <update_rate>30</update_rate>
+            <update_rate>50</update_rate>
             
             <!-- wheels -->
             <left_joint>base_to_wheel_left</left_joint>
@@ -128,12 +128,12 @@
             <!-- TF frames -->
             <odometry_frame>${robot_name}/odom</odometry_frame>
             <robot_base_frame>${robot_name}/base_link</robot_base_frame>
-            <publish_odom_tf>true</publish_odom_tf>
+            <publish_odom_tf>false</publish_odom_tf>
             <publish_wheel_tf>false</publish_wheel_tf>
 
             <!-- limits -->
-            <max_wheel_torque>1.0</max_wheel_torque>
-            <max_wheel_acceleration>2.0</max_wheel_acceleration>
+            <max_wheel_torque>10.0</max_wheel_torque>
+            <max_wheel_acceleration>5.0</max_wheel_acceleration>
 
 
             </plugin>
@@ -243,5 +243,4 @@
                 <joint_name>laser_scan_frame_joint</joint_name>
             </plugin>
         </gazebo>
-
 </robot>
