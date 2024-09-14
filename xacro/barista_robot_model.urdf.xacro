@@ -422,11 +422,11 @@
 
         <!-- kinematics -->
         <wheel_separation>0.256</wheel_separation>
-        <wheel_diameter>0.06</wheel_diameter>
+        <wheel_diameter>0.0704</wheel_diameter>
 
         <!-- limits -->
-        <max_wheel_torque>1.0</max_wheel_torque>
-        <max_wheel_acceleration>2.0</max_wheel_acceleration>
+        <max_wheel_torque>4.0</max_wheel_torque>
+        <max_wheel_acceleration>4.0</max_wheel_acceleration>
 
         <!-- output -->
         <publish_odom>true</publish_odom>
